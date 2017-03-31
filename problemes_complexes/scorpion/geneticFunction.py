@@ -69,29 +69,37 @@ def createIndividual():
             genRhoFleche(),         # 7 7850
             genYoungModule(),       # 8 210
             genPoissonCoeff()]      # 9 0.27
-
-def distanceCible(individual):
+def tnt(individual):
     ressort = physicFunction.ressort(individual[8], individual[9])
     longVide = physicFunction.longueurVide(individual[1], individual[4])
     longDeplacement = physicFunction.longueurDeplacement(individual[5], longVide)
     masse = physicFunction.masseProjectile(individual[7], individual[6], individual[5])
     velocity = physicFunction.velocite(ressort, longDeplacement, masse)
+    energie = physicFunction.energieImpact(masse, velocity)
+    tnt = physicFunction.energieTNT(energie)
+    return tnt
+
+def distanceCible(individual):
+    masse = physicFunction.masseProjectile(individual[7], individual[6], individual[5])
+    longVide = physicFunction.longueurVide(individual[1], individual[4])
+    longDeplacement = physicFunction.longueurDeplacement(individual[5], longVide)
+    ressort = physicFunction.ressort(individual[8], individual[9])
+    velocity = physicFunction.velocite(ressort, longDeplacement, masse)
     portee = physicFunction.portee(velocity, c.EARTH, individual[0])
     distance = abs(c.DISTANCE - portee)
 
 
-    energie = physicFunction.energieImpact(masse, velocity)
-    tnt = physicFunction.energieTNT(energie)
     return distance
 
-def scoreIndividual(distance):
+def scoreIndividual(distance,tnt):
     # score=-3*distance+900
     # if distance>300 or score<1:
     #     score=1
     # print(distance,score)
     # return math.pow(score,2)
-    print(distance,(1000/(1+math.pow(distance/10,2))))
-    return (1000/(1+math.pow(distance/10,2)))
+    print(distance,(1000/(1+math.pow(distance/10,2)))+tnt*0.0001)
+    print(tnt)
+    return (1000/(1+math.pow(distance/10,2)))+tnt*0.0001
 
 
 
