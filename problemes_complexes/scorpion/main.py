@@ -15,7 +15,9 @@ scoreCumul[0] = 0
 distance=[]
 moyenneNote=[]
 tnt=[]
+variance=[]
 for generation in range(0,c.NB_GENERATION):
+
     score=[]
     if len(individual)==0:
         for i in range(1, c.NB_POP + 1):
@@ -26,14 +28,15 @@ for generation in range(0,c.NB_GENERATION):
 
     sommeDistance=0
     sommeTnt = 0
-    deltaScore=[]
+    deltaScore=0
+    moyenneNote.append(scoreCumul[c.NB_POP] / c.NB_POP)
     for i in range(1,c.NB_POP +1):
         sommeDistance += geneticFunction.distanceCible(individual[i])
         sommeTnt+= geneticFunction.tnt(individual[i])
-
+        deltaScore+=score[i-1]-moyenneNote[generation]
+    variance.append(deltaScore/c.NB_POP)
     distance.append(sommeDistance/c.NB_POP)
     tnt.append(sommeTnt/c.NB_POP)
-    moyenneNote.append(scoreCumul[c.NB_POP] / c.NB_POP)
     children = {}
     for i in range(1, len(couple)+1):
         cut=c.HEIGHT_CUT
@@ -54,7 +57,6 @@ for generation in range(0,c.NB_GENERATION):
     individual = children
     del children
     # print(individual)
-
 plt.xlabel('nombre de generation')
 plt.subplot(221)
 plt.ylabel("Distance à la cible")
@@ -65,6 +67,9 @@ plt.plot(tnt)
 plt.subplot(223)
 plt.ylabel("Note Moyenne")
 plt.plot(moyenneNote)
+plt.subplot(224)
+plt.ylabel("Variance")
+plt.plot(variance)
 plt.show()
 fin=time.time()
 print(fin-debut)

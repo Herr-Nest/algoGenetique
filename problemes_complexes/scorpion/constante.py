@@ -2,7 +2,7 @@
 DISTANCE = 300
 
 # nombre d'individu par generation
-NB_POP = 3000
+NB_POP = 30000
 NB_GENERATION=100
 # hauteur de coupe
 HEIGHT_CUT = 5

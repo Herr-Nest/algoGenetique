@@ -97,9 +97,9 @@ def scoreIndividual(distance,tnt):
     #     score=1
     # print(distance,score)
     # return math.pow(score,2)
-    print(distance,(1000/(1+math.pow(distance/10,2)))+tnt*0.0001)
+    print(distance,(1000/(1+math.pow(distance/10,2)))+tnt*0.00001)
     print(tnt)
-    return (1000/(1+math.pow(distance/10,2)))+tnt*0.0001
+    return (1000/(1+math.pow(distance/10,2)))+tnt*0.00001
 
 
 
