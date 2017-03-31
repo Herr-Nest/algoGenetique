@@ -3,7 +3,7 @@ DISTANCE = 300
 
 # nombre d'individu par generation
 NB_POP = 30000
-NB_GENERATION=100
+NB_GENERATION=40
 # hauteur de coupe
 HEIGHT_CUT = 5
 
@@ -11,7 +11,7 @@ HEIGHT_CUT = 5
 CHANGE_CUT = 8
 
 # taux de mutation
-MUTATION = 1
+MUTATION = 2
 
 # alpha : 1-80      angle de hausse
 ALPHA_MIN = 1
